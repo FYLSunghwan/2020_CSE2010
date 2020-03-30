@@ -1,0 +1,6 @@
+Insertion(5) Failed: cannot find the location to be inserted
+Deletion(9) Failed: Element 9 is not in the list
+Finding(3) Failed: Element 3 is not in the list
+Key of the previous node of 7 is header.
+Key of the previous node 2 is 7.
+key: 7 key: 2 key: 4 
