@@ -1,0 +1,12 @@
+insert 1
+111 is not in the tree
+insert 111
+11 is not in the tree
+insert 11
+1 11 111 
+delete 111
+Deletion Error : 111 is not in the tree.
+1 11 
+delete 11
+delete 1
+
