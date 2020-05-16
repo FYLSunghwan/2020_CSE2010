@@ -1,0 +1,18 @@
+Delete Error : heap is empty
+Print Error : heap is empty
+insert 5
+insert 4
+insert 3
+insert 2
+insert 1
+5 4 3 2 1
+Max Element: 5 deleted
+4 2 3 1
+5 is not in the heap
+4 is in the heap
+insert 5
+Insert Error : heap is full
+Insert Error : heap is full
+Max Element: 5 deleted
+Max Element: 4 deleted
+3 2 1

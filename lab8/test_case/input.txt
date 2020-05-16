@@ -1,0 +1,19 @@
+n 5
+d
+p
+i 5
+i 4
+i 3
+i 2
+i 1
+p
+d
+p
+f 5
+f 4
+i 5
+i 5
+i 6
+d
+d
+p

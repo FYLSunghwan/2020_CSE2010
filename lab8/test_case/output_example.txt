@@ -1,0 +1,9 @@
+Print Error : heap is empty
+Delete Error : heap is empty
+insert 1
+1
+insert 2
+2 1
+Max Element: 2 deleted
+Max Element: 1 deleted
+Delete Error : heap is empty
