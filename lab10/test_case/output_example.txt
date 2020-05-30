@@ -1,0 +1,3 @@
+1->2 (cost: 3)
+1->2->3 (cost: 5)
+Cannot reach to node 4.
