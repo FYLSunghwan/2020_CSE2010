@@ -36,8 +36,8 @@ typedef struct Heap {
     Node* Element;
 }Heap;
 
-Graph CreateGraph(int size);
-void printShortestPath(Graph g);
+Graph* CreateGraph(int size);
+void printShortestPath(Graph* g);
 Heap* createMinHeap(int heapSize);
 void insertToMinHeap(Heap* minHeap, int vertex, int distance);
 Node deleteMin(Heap* minHeap);
@@ -64,49 +64,50 @@ int main(int argc, char* argv[]) {
         return 0;
     }
 
-    Graph g;
+    Graph* g;
     int size;
 
     fscanf(fi, "%d\n",&size);
     g = CreateGraph(size+1);
     int n1, n2, w;
     while(fscanf(fi, "%d-%d-%d", &n1, &n2, &w)!=EOF) {
-        g.vertices[n1][n2] = w;
+        g->vertices[n1][n2] = w;
     }
     printShortestPath(g);
 
-    free(g.nodes);
-    for(int i=0;i<g.size;i++) free(g.vertices[i]);
-    free(g.vertices);
+    free(g->nodes);
+    for(int i=0;i<g->size;i++) free(g->vertices[i]);
+    free(g->vertices);
     fclose(fi);
     fclose(fo);
 }
 
-Graph CreateGraph(int size) {
-    Graph g;
-    g.nodes = (Node*)malloc(sizeof(Node)*size);
-    g.vertices = (int**)malloc(sizeof(int*)*size);
-    g.size = size;
+Graph* CreateGraph(int size) {
+    Graph* g;
+    g = (Graph*)malloc(sizeof(Graph));
+    g->nodes = (Node*)malloc(sizeof(Node)*size);
+    g->vertices = (int**)malloc(sizeof(int*)*size);
+    g->size = size;
     for(int i=0;i<size;i++) {
-        g.vertices[i] = (int*)malloc(sizeof(int)*size);
-        g.nodes[i].vertex = i;
-        for(int j=0;j<size;j++) g.vertices[i][j]=0;
+        g->vertices[i] = (int*)malloc(sizeof(int)*size);
+        g->nodes[i].vertex = i;
+        for(int j=0;j<size;j++) g->vertices[i][j]=0;
     }
     return g;
 }
 
-void printShortestPath(Graph g) {
-    Heap* heap = createMinHeap(g.size);
-    for(int i=1;i<g.size;i++) {
-        g.nodes[i].dist = INT_MAX;
-        g.nodes[i].prev = -1;
+void printShortestPath(Graph* g) {
+    Heap* heap = createMinHeap(g->size);
+    for(int i=1;i<g->size;i++) {
+        g->nodes[i].dist = INT_MAX;
+        g->nodes[i].prev = -1;
     }
-    g.nodes[1].dist = 0;
-    for(int i=1;i<g.size;i++) {
-        if(g.vertices[1][i]) {
-            g.nodes[i].dist = g.vertices[1][i];
-            g.nodes[i].prev = 1;
-            insertToMinHeap(heap, g.nodes[i].vertex, g.nodes[i].dist);
+    g->nodes[1].dist = 0;
+    for(int i=1;i<g->size;i++) {
+        if(g->vertices[1][i]) {
+            g->nodes[i].dist = g->vertices[1][i];
+            g->nodes[i].prev = 1;
+            insertToMinHeap(heap, g->nodes[i].vertex, g->nodes[i].dist);
         }
     }
 
@@ -115,25 +116,25 @@ void printShortestPath(Graph g) {
     while(heap->Size>0) {
         now = deleteMin(heap);
         now_i = Idx(g, now.vertex);
-        for(int i=1;i<g.size;i++) {
-            if(g.vertices[now_i][i]!=0) {
-                int nCost = now.dist + g.vertices[now_i][i];
-                if(nCost < g.nodes[i].dist) {
-                    g.nodes[i].dist = nCost;
-                    g.nodes[i].prev = now.vertex;
-                    update(heap, g.nodes[i].vertex, g.nodes[i].dist);
+        for(int i=1;i<g->size;i++) {
+            if(g->vertices[now_i][i]!=0) {
+                int nCost = now.dist + g->vertices[now_i][i];
+                if(nCost < g->nodes[i].dist) {
+                    g->nodes[i].dist = nCost;
+                    g->nodes[i].prev = now.vertex;
+                    update(heap, g->nodes[i].vertex, g->nodes[i].dist);
                 }
             }
         }
     }
 
-    for(int i=2;i<g.size;i++) {
-        if(g.nodes[i].prev == -1) {
+    for(int i=2;i<g->size;i++) {
+        if(g->nodes[i].prev == -1) {
             fprintf(fo, "Cannot reach to node %d.\n", i);
             continue;
         }
         path(g, i);
-        fprintf(fo, "%d (cost: %d)\n", g.nodes[i].vertex, g.nodes[i].dist);
+        fprintf(fo, "%d (cost: %d)\n", g->nodes[i].vertex, g->nodes[i].dist);
     }
 }
 
