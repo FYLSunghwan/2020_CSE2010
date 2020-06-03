@@ -43,10 +43,10 @@ void insertToMinHeap(Heap* minHeap, int vertex, int distance);
 Node deleteMin(Heap* minHeap);
 
 Node CreateNode(int vertex, int dist, int prev);
-int Idx(Graph graph, int x);
+int Idx(Graph* graph, int x);
 int heapIdx(Heap* heap, int x);
 void update(Heap* heap, int vertex, int dist);
-void path(Graph graph, int idx);
+void path(Graph* graph, int idx);
 //////////////////////////////////////////////////////////////////////////
 
 FILE* fi;
@@ -193,10 +193,10 @@ Node CreateNode(int vertex, int dist, int prev) {
     return node;
 }
 
-int Idx(Graph graph, int x) {
+int Idx(Graph* graph, int x) {
     int i;
-    for(i=1;i<graph.size;i++) {
-        if(graph.nodes[i].vertex == x) return i;
+    for(i=1;i<graph->size;i++) {
+        if(graph->nodes[i].vertex == x) return i;
     }
     return -1;
 }
@@ -222,7 +222,7 @@ void update(Heap* heap, int vertex, int dist) {
         }
     }
 }
-void path(Graph graph, int idx) {
-    if(graph.nodes[idx].prev != 1) path(graph, graph.nodes[idx].prev);
-    fprintf(fo, "%d->", graph.nodes[idx].prev);
+void path(Graph* graph, int idx) {
+    if(graph->nodes[idx].prev != 1) path(graph, graph->nodes[idx].prev);
+    fprintf(fo, "%d->", graph->nodes[idx].prev);
 }
