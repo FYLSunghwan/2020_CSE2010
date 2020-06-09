@@ -1,0 +1,14 @@
+Inserted 1
+Inserted 11
+Inserted 4
+Inserted 15
+Inserted 22
+Not found
+Already exists
+Inserted 23
+Inserted 24
+Inserted 9
+Inserted 18
+Deleted 4
+Deleted 18
+11 1 23 24 0 15 0 0 0 22 9
